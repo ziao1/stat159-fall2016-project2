@@ -12,7 +12,7 @@ response_test=response[test]
 ##Ridge regression
 grid <- 10^seq(10, -2, length = 100)
 model_data <-scaled_credit[train_set,]
-ridge_train <- cv.glmnet(model_data[,-12], y = model_data[,12] , intercept = FALSE, alpha=0,
+ridge_train <- cv.glmnet(as.matrix(model_data[,-12]), y = model_data[,12] , intercept = FALSE, alpha=0,
                          standardize = FALSE, lambda = grid)
 
 #lambda min
