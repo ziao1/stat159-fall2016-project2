@@ -1,4 +1,4 @@
-setwd("C:/Users/Lydia/Documents/Stat159/proj2")
+#setwd("C:/Users/Lydia/Documents/Stat159/proj2")
 scaled_credit <-read.csv(file = "./data/scaled_credit.csv")
 
 ##OLS
