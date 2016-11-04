@@ -1,3 +1,6 @@
+# Ridge Regression
+library("glmnet")
+
 #pre-modeling data processing
 credit <- read.csv("data/Credit.csv")
 credit <- credit[,-1]
