@@ -1,5 +1,5 @@
 #pre-modeling data processing
-credit <- read.csv("~/Stat159/proj2/data/Credit.csv")
+credit <- read.csv("data/Credit.csv")
 credit <- credit[,-1]
 
 #dummy out categorical variables
