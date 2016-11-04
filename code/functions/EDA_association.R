@@ -51,6 +51,7 @@ dev.off()
 balance_aa = credit$Balance[credit$Ethnicity == 'African American']
 balance_a = credit$Balance[credit$Ethnicity == 'Asian']
 balance_c = credit$Balance[credit$Ethnicity == 'Caucasian']
+
 jpeg("./images/Conditional Boxplot of African American.png")
 boxplot(balance_aa, main = "Conditional Boxplot of Balance of African American", xlab = "Balance")
 dev.off()
@@ -62,3 +63,4 @@ dev.off()
 jpeg("./images/Conditional Boxplot of Caucasian.png")
 boxplot(balance_c, main = "Conditional Boxplot of Balance of Caucasian", xlab = "Balance")
 dev.off()
+
