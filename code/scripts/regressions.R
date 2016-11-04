@@ -22,7 +22,7 @@ ridge_test_MSE <-mean((ridge_pred-response_test)^2)
 ridge = glmnet(predictors,response,lambda=grid, intercept = FALSE)
 ridge_coef = predict(ridge,type="coefficients",s=bestlam_1)
 ridge_coef[ridge_coef!=0]
-ridge_official_coef <-as.numeric(ridge_coef)[-1]
+ridge_official_coef <-as.numeric(lasso_coef)[-1]
 
 save(ridge_train,
      bestlam_1,
