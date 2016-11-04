@@ -1,7 +1,22 @@
 # Lasso Regression
 library("glmnet")
 
-scaled_credit <-read.csv(file = "./data/scaled_credit.csv")
+#pre-modeling data processing
+credit <- read.csv("~/Stat159/proj2/data/Credit.csv")
+credit <- credit[,-1]
+
+#dummy out categorical variables
+temp_credit <- model.matrix(Balance ~ ., data = credit)
+
+#removing column of ones, and appending Balance
+new_credit <- cbind(temp_credit[,-1], Balance = credit$Balance)
+
+#scaling and centering
+scaled_credit <- scale(new_credit, center = TRUE, scale = TRUE)
+
+#export scaled data
+write.csv(scaled_credit, file = "./data/scaled_credit.csv")
+
 set.seed(5)
 train_set <- sample(c(1:400), size = 300)
 predictors = scaled_credit[,c(1:11)]
