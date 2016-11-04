@@ -37,7 +37,7 @@ lasso_test_MSE <-mean((lasso_pred-response_test)^2)
 lasso = glmnet(predictors,response,lambda=grid, intercept = FALSE)
 lasso_coef = predict(lasso,type="coefficients",s=bestlam_2)
 lasso_coef[lasso_coef!=0]
-lasso_official_coef  <-as.numeric(ridge_coef)[-1]
+lasso_official_coef  <-as.numeric(lasso_coef)[-1]
 save(lasso_train,
      bestlam_2,
      lasso_test_MSE,
