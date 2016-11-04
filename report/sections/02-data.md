@@ -1,0 +1,7 @@
+## Data
+
+In this project, we are using the "Credit" dataset. The dataset contains 12 columns each representing a variable and 400 rows each representing a unique person. 
+
+* Predictors: 11 predictors including Income, Limit, Rating, Cards, Age, Education, Gender, Student, Maaried, Ethinicity.
+* Response: 1 response variable namely Balance
+
