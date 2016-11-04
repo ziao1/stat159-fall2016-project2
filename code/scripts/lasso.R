@@ -11,7 +11,7 @@ response_test=response[test]
 
 ## Lasso Regression
 grid = 10^seq(10, -2, length = 100)
-lasso_train = cv.glmnet(predictors[train_set,], response[train_set], intercept = FALSE, lambda = grid, standardize = FALSE)
+lasso_train = cv.glmnet(as.matrix(predictors[train_set,]), response[train_set], intercept = FALSE, lambda = grid, standardize = FALSE)
 
 plot(lasso_train)
 bestlam_2 = lasso_train$lambda.min
