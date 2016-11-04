@@ -12,7 +12,7 @@ response_test=response[test]
 ##Ridge regression
 grid <- 10^seq(10, -2, length = 100)
 model_data <-scaled_credit[train_set,]
-ridge_train <- cv.glmnet(model_data[,-12], y = model_data[,12] , intercept = FALSE, 
+ridge_train <- cv.glmnet(model_data[,-12], y = model_data[,12] , intercept = FALSE, alpha=0,
                          standardize = FALSE, lambda = grid)
 
 #lambda min
@@ -23,7 +23,7 @@ ridge_pred=predict(ridge_train,s=bestlam_1 ,newx=predictors[-train_set,])
 ridge_test_MSE <-mean((ridge_pred-response_test)^2)
 
 #ridge on full dataset
-ridge = glmnet(predictors,response,lambda=grid, intercept = FALSE)
+ridge = glmnet(predictors,response,lambda=grid, alpha=0,intercept = FALSE)
 ridge_coef = predict(ridge,type="coefficients",s=bestlam_1)
 ridge_coef[ridge_coef!=0]
 ridge_official_coef <-as.numeric(ridge_coef)[-1]
@@ -45,3 +45,4 @@ cat("Lasso Test MSE")
 cat("\n")
 ridge_test_MSE
 sink()
+
