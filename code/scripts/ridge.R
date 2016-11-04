@@ -1,4 +1,4 @@
-setwd("C:/Users/Lydia/Documents/Stat159/proj2")
+# Ridge Regression
 library("glmnet")
 
 scaled_credit <-read.csv(file = "./data/scaled_credit.csv")
