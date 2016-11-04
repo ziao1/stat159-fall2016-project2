@@ -1,4 +1,4 @@
-setwd("C:/Users/Lydia/Documents/Stat159/proj2")
+## Partial Least Squares Regression
 library(pls)
 
 ## Partial Least Squares Regression
