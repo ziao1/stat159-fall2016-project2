@@ -1,0 +1,46 @@
+---
+title: "Predictive Modeling with Credit Dataset"
+author: "Lydia Maher & Ziao Liu"
+date: "November 4, 2016"
+output: ioslides_presentation
+---
+
+## The Data Set
+
+- In this project, we are using the "Credit" dataset. The dataset contains 12 columns each representing a variable and 400 rows each representing a unique person.
+
+- Predictors: 11 predictors including Income, Limit, Rating, Cards, Age, Education, Gender, Student, Married, Ethnicity.
+- Response: 1 response variable namely Balance
+
+## The Prediction Goal
+
+- Given specific values for predictors such as Income, Gender, Ethnicity, we are aiming to be able to predict the Balance as accurately as possible.
+- In order to do so though, we need to look at a variety of methods and compare the various regression coefficient obtained. The next slide details these methods. 
+
+## Shrinkage Methods Part 1
+
+- Least Squares Regression:  
+      > This is our 'base' model. We expand on a simple linear regression model with just one intercept and slope and calculate a variety of coefficients for each predictor. Technically there are an infinite amount of possible coefficients, but using the least squares criterion allows us to factor this down.
+
+- Ridge Regression:
+      > Ridge regression is very similar to least squares, except that the coefficients are estimated by minimizing a slightly different quantity. Ridge regression seeks coefficients that fit the data well by making RSS small and adding a l2 penalty to the RSS which is small when Beta is close to zero and shrinks the estimate of Beta to zero. Ridge regression???s advantage over least squares is rooted in the bias-variance trade-off. As ?? increases, the flexibility of the ridge regression fit decreases, leading to decreased variance but increased bias.
+      
+## Shrinkage Methods Part 2
+- Lasso Regression:
+    > Lasso Regression shares the same intuition as Ridge Regression which is adding a penalty to RSS to shrink coefficients and make better prediction. The difference between Lasso and Ridge is that Lasso uses a l1 penalty rather than a l2 penalty. In this case, Lasso is able to shrink coefficients to exactly zero and would return only a subset of predictors.
+    
+## The Dimension Reduction Methods 
+- Principal Components Regression:
+    > Principal components analysis (PCA) is a common approach for deriving a low-dimensional set of features from a large set of variables. The PCR approach involves constructing the first M principal components, Z1,...,ZM, and then using these components as the predictors in a linear regression model that is fit using least squares.
+    
+- Partial Least Squares Regression:
+    > PCR has a major disadvantage that there is no guarantee that the directions that best explain the predictors will also be the best directions to use for predicting the response. Similarly, PLS is a dimension reduction method which first identifies a new set of features Z1,...,ZM that are linear combinations of the original features, and then fits a linear model via least squares using these M new features. PLS learns the new features in a supervised way which means that PLS find directions that help to explain both response and predictors.
+
+## Relevant Findings
+
+Here is a graph with all the different regression methods and the resulting coefficients:
+
+![](C:/Users/Lydia/Documents/Stat159/proj2/images/barcharts.png)
+
+## Main Conclusions
+From our result, we found that Lasso Regression performs best, followed by Ridge Regression using the measure of test Mean Squared Error. Dimension Reduction Regression, in this case, do not perform as well as Shrinkage Methods. The three leading predictors in prediction are Limit, Income and Rating.
