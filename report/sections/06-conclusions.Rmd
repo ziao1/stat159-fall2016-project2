@@ -1,4 +1,7 @@
-## Conclusion
+---
+output: pdf_document
+---
+Conclusion
 
 In this project, we performed a data analysis cycle which contains getting raw datasets, data cleaning and processment, exploratory data analysis, modeling and tuning parameters, visualization of results, report and presentation. 
 
@@ -7,10 +10,9 @@ We replicated major findings on chapter 6: Linear Model Selection and Regulariza
 From our result, we found that Lasso Regression performs best, followed by Ridge Regression using the measure of test Mean Squared Error. Dimension Reduction Regression, in this case, do not perform as well as Shrinkage Methods. The three leading predictors in prediction are Limit, Income and Rating. 
 
 
+References
+Lecture slides of Stat 159
 
-### References
-_Lecture slides of Stat 159_
-
-_"An Introduction to Statistical Learning" by James et al_
+"An Introduction to Statistical Learning" by James et al
 
 

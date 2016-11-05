@@ -1,4 +1,7 @@
-## Introduction
+---
+output: pdf_document
+---
+Introduction
 
 Since we are predicting for a continuous output, we choose Least Square Regression as our base model. Then we choose two Shrinkage Methods (Ridge Regression and Lasso Regression) and two Dimension Reduction Methods (Principal Components Regression and Partial Least Squares Regression) to compare the results with our base model. 
 

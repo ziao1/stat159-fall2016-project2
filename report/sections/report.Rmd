@@ -1,0 +1,237 @@
+---
+output: pdf_document
+---
+\usepackage[utf8]{inputnc}
+Stat 159 Project 2
+
+Author: Lydia Maher, Ziao Liu
+
+Abstract
+
+In this project, we are doing a typical data analysis cycle which contains getting raw unstructured datasets, data cleaning and processment, exploratory data analysis, modeling and tuning parameters, visualization of results, report and presentation. 
+
+We are replicating work on chapter 6: Linear Model Selection and Regularization (from "An Introduction to Statistical Learning" by James et al) with the dataset "Credit".  In detail, we are trying to predict "Balance", which is the response variable, from 11 predictors including Income, Limit, Rating, Cards, Age, Education, Gender, Student, Maaried, Ethinicity.
+
+Since it is a continuous prediction, we use five algorithms: Least Square Regression, Ridge Regression, Lasso Regression, Principal Components Regression, and Partial Least Squares Regression. From our output, we found that Lasso Regression performs best, followed by Ridge Regression. Dimension Reduction Regression, in this case, do not perform as well as Shrinkage Methods.
+
+Introduction
+
+Since we are predicting for a continuous output, we choose Least Square Regression as our base model. Then we choose two Shrinkage Methods (Ridge Regression and Lasso Regression) and two Dimension Reduction Methods (Principal Components Regression and Partial Least Squares Regression) to compare the results with our base model. 
+
+For parameter choosing, we use 10-fold Cross Validation to choose minimum lambda for Shrinkage Methods and minimum validation  components for Dimension Reduction Methods. Then we compare results by splitting dataset into training set and test set and calculating Mean Square Error on test dataset. Finally we calculate the coefficients in each of five methods used for prediction to see which factor matters most in prediction.
+
+Data
+
+In this project, we are using the "Credit" dataset. The dataset contains 12 columns each representing a variable and 400 rows each representing a unique person. 
+
+Predictors: 11 predictors including Income, Limit, Rating, Cards, Age, Education, Gender, Student, Maaried, Ethinicity.
+Response: 1 response variable namely Balance
+
+
+Methods
+
+Algorithms For Prediction
+
+Least Squares Regression:
+
+One way to predict sales based on multiple predictors is to fit separate linear regression model for each predictor, and the other way is to extend the linear model so that it can directly accommodate multiple predictors. For a one predictor case, we can just use a simple linear regression with Balance = Beta-0 + Beta-1*Income where Beta-0 is the intercept and Beta-1 is the slope of the regreession line, and replace Income with the other predictors to get different results. For a multiple linear regression, we need more coefficients to represent the data properly. We can formulate a linear regression with all predictors via the least square criterion which is the same criterion in the simple linear regression.
+
+Ridge Regression:
+
+Ridge regression is very similar to least squares, except that the coefficients are estimated by minimizing a slightly different quantity. Ridge regression seeks coefficients that fit the data well by making RSS small which is the same intuition as least square regression. The difference between Ridge Regression and Least Regression is that Ridge Regression adds a l2 penalty to the RSS which is small when Beta is close to zero and shrinks the estimate of Beta to zero. Ridge regression’s advantage over least squares is rooted in the bias-variance trade-off
+
+Lasso Regression:
+
+Lasso Regression shares the same intuition as Ridge Regression which is adding a penalty to RSS to shrink coefficients and make better prediction. The difference between Lasso and Ridge is that Lasso uses a l1 penalty rather than a l2 penalty. In this case, Lasso is able to shrink coefficients to exactly zero and would return only a subset of predictors.
+
+Principal Components Regression:
+
+Principal components analysis (PCA) is a common approach for deriving a low-dimensional set of features from a large set of variables. Principal Components Regression is a dimension reduction technique for regression. The principal components regression (PCR) approach involves constructing the first M principal components, Z1,...,ZM, and then using these components as the predictors in a linear regression model that is fit using least squares. we assume that the directions in which X1,..., Xp show the most variation are the directions that are associated with Y.
+
+Partial Least Squares Regression:
+
+PCR has a major disadvantage that there is no guarantee that the directions that best explain the predictors will also be the best directions to use for predicting the response. Similarly, PLS is  a dimension reduction method which first identifies a new set of features Z1,...,ZM that are linear combinations of the original features, and then fits a linear model via least squares using these M new features. The difference between PLS and PCR is that PLS learns the new features in a supervised way which means that PLS find directions that help to explain both response and predictors.
+
+Parameter Choosing for Algorithms
+
+Cross Validation:
+
+We use Cross Validation to choose best parameters that give us best prediction accuracy. Specifically we use 10-fold Cross Validation. In this case, The data set is divided into 10 subsets, and the holdout method is repeated 10 times. Each time, one of the 10 subsets is used as the test set and the other 9 subsets form a training set. Then the average error across all 10 trials is computed. The advantage of this method is that it matters less how the data gets divided. Every data point gets to be in a test set exactly once, and gets to be in a training set 9 times. 
+
+Analysis
+
+Exploratry Data Analysis
+
+Quantitative Variables
+
+There are 7 quantitative variables in the dataset, including Income, Limit, Rating, Cards, Age, Education, Balance. For each of the variable, we computed minimum, maximum, range, median, quantile, IQR, mean, and standard deviation for each variable.
+
+The following table is the summary statistics
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/eda_output.png)
+
+Then we make Histograms and Boxplots for each of the variables
+
+For Predictor Age:
+
+Boxplot
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/Boxplot%20of%20Age.png)
+
+Histogram
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/Histogram%20of%20Age.png)
+
+For Predictor Cards
+
+Boxplot
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/Boxplot%20of%20Cards.png)
+
+Histogram
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/Histogram%20of%20Cards.png)
+
+For Predictor Education
+
+Boxplot
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/Boxplot%20of%20Education.png)
+
+Histogram
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/Histogram%20of%20Education.png)
+
+For Predictor Income
+
+Boxplot
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/Boxplot%20of%20Income.png)
+
+Histogram
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/Histogram%20of%20Income.png)
+
+For Predictor Limit
+
+Boxplot
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/Boxplot%20of%20Limit.png)
+
+Histogram
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/Histogram%20of%20Limit.png)
+
+For Predictor Rating
+
+Boxplot
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/Boxplot%20of%20Rating.png)
+
+Histogram
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/Histogram%20of%20Rating.png)
+
+Qualitative Variables
+
+There are 4 qualitative variables in the dataset, including Ethinicity, Gender, Married, Student. For each of the variable, we computed the frequency of each category within the variable and visualize the results by Bar Chart.
+
+Ethinicity
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/Bar%20Chart%20of%20Ethnicity.png)
+
+Gender
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/Bar%20Chart%20of%20Gender.png)
+
+Married
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/Bar%20Chart%20of%20Married.png)
+
+Student
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/Bar%20Chart%20of%20Student.png)
+
+Association
+
+To study the association between predictors and response variable, we first calculate the correlation matrix among all predictors.
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/correlation_matrix.png)
+
+
+Then we visualize the scatterplot mattrix
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/scatterplot-matrix.png)
+
+Analysis of variance (ANOVA) is a collection of statistical models used to analyze the differences among group means and their associated procedures (such as "variation" among and between groups)
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/anova.png)
+
+Finally we visualize the conditional boxplots of Balance conditioned to each category of Gender, Ethnicity, Student and Married.
+
+
+Ethinicity
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/Conditional%20Boxplot%20of%20African%20American.png)
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/Conditional%20Boxplot%20of%20Caucasian.png)
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/Conditional%20Boxplot%20of%20Asian.png)
+
+Gender
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/Conditional%20Boxplot%20of%20Female.png)
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/Conditional%20Boxplot%20of%20Male.png)
+
+Married
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/Conditional%20Boxplot%20of%20Married.png)
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/Conditional%20Boxplot%20of%20Unmarried.png)
+
+Student
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/Conditional%20Boxplot%20of%20Student.png)
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/Conditional%20Boxplot%20of%20Nonstudent.png)
+
+Results
+
+ Since it is a continuous prediction problem, we choose Least Squares Regression as our model. In addition, we performed two Shrinkage Methods (Ridge Regression and Lasso Regression) and two Dimension Reduction Methods (Principal Components Regression and Partial Least Squares Regression) to compare the results with our base model. 
+
+Then we used 10-fold Cross Validation to choose minimum lambda for Shrinkage Methods and minimum validation components for Dimension Reduction Methods. With the chosen parameter, we compare results by calculating Mean Square Error on test dataset.
+
+The following table is the test Mean Square Error for the four methods.
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/test-MSE.png)
+
+From the table, we can see that the Lasso Regression has the minimum test Mean Squared Error in this case, followed by Ridge Regression. The Dimension Reduction Methods in this case do not perform as well as Shrinkage Methods.
+
+Then to see which predictors matter most in prediction, we visualize the coefficients of predictors within each method as a table.
+
+![](https://github.com/ziao1/stat159-fall2016-project2/raw/master/images/coefficients-values.png)
+
+From the table, we can see that in all five methods we used for prediction, Limit is the single most important predictor for Balance which corresponds to our common sense that amount of limit is usually highly correlated to amount of Balance. 
+
+For Ridge Regression, the second and third important factors are Rating and Income. For Lasso Regression, the second and third important factors are Income and Rating. For Pricipal Components Regression, the second and third important factors are Income and Rating. For Parse Least Squares Regression, the second and third important factors are Income and Rating. Hence we can conclude that the three leading factors are Limit, Income, and Rating.
+
+
+To get a better intuition of the importance of each factor, we visualize the coefficients of each predictor in each five methods in bar plots.
+
+![](/Users/Simon/Desktop/fall2016/stat159/stat159-fall2016-project2/images/factors.png)
+
+
+Conclusion
+
+In this project, we performed a data analysis cycle which contains getting raw datasets, data cleaning and processment, exploratory data analysis, modeling and tuning parameters, visualization of results, report and presentation. 
+
+We replicated major findings on chapter 6: Linear Model Selection and Regularization (from "An Introduction to Statistical Learning" by James et al) with the dataset "Credit". we performed five algorithms: Least Square Regression, Ridge Regression, Lasso Regression, Principal Components Regression, and Partial Least Squares Regression. 
+
+From our result, we found that Lasso Regression performs best, followed by Ridge Regression using the measure of test Mean Squared Error. Dimension Reduction Regression, in this case, do not perform as well as Shrinkage Methods. The three leading predictors in prediction are Limit, Income and Rating. 
+
+
+References
+Lecture slides of Stat 159
+
+"An Introduction to Statistical Learning" by James et al
